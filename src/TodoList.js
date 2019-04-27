@@ -42,7 +42,7 @@ class TodoList extends React.Component {
 
         return (
             <div>
-                <label htmlfor="new-todo">Add Todo</label>
+                <label htmlFor="new-todo">Add Todo</label>
                 <input 
                     id="new-todo" 
                     onChange={this.onChange}
