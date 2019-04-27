@@ -19,9 +19,13 @@ class TodoList extends React.Component {
 
 
         this.setState(prevState => {
+            const newTodo = {
+                value: prevState.newTodo,
+                isComplete: false
+            };
             return {
                 // todo: prevState.todos.concat(['new todo'])
-                todos: [...prevState.todos, prevState.newTodo],
+                todos: [...prevState.todos, newTodo],
                 newTodo: ''
             };
         });
@@ -36,9 +40,43 @@ class TodoList extends React.Component {
         })
     }
 
+    completeItem = (idx) => {
+        return(event) => {
+            console.log(idx);
+            // set the new state of todos
+
+            const selectedTodo =  this.state.todos[idx];
+            selectedTodo.isComplete = true;
+
+            this.setState(prevState => {
+                return {
+                    todos: this.state.todos
+                }
+            });
+            // const updatedTodos = this.state.todos.map((todo, todoIdx) => {
+            //     if (todoIdx === idx) {
+            //         return {
+            //             ...todo,
+            //             isComplete: true
+            //         }
+            //     }
+            //     return todo;
+            // });
+            // this.setState({todos: updatedTodos});
+        }
+    }
+
     render() {
         const todoItems = this.state.todos
-        .map((t, idx) => <TodoItem todo={t} key={idx} />);
+            .map((t, idx) => {
+                return (
+                    <TodoItem 
+                        onClick={this.completeItem(idx)}
+                        todo={t}
+                        key={idx}
+                    />
+                );
+            });
 
         return (
             <div>
